@@ -19,7 +19,7 @@ class AuthMethods {
     return model.User.fromSnap(snap);
   }
 
-  //Sign up
+  //Sign Up
   Future<String> signUpUser({
     required String email,
     required String password,
