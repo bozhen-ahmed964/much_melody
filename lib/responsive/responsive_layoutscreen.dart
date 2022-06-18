@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muchmelody/providers/user_provider.dart';
-import 'package:muchmelody/utils/dimentions.dart';
+import 'package:muchmelody/utils/global_variables.dart';
 import 'package:provider/provider.dart';
 
 class responsiveLayout extends StatefulWidget {

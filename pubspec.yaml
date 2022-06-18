@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_image: ^4.1.3
+  flutter_launcher_icons: ^0.9.3
   flutter_svg: ^1.1.0
   image_picker: ^0.8.5+3
   provider: ^6.0.3

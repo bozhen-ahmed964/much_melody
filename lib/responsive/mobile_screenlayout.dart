@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:muchmelody/utils/colors.dart';
 
+import '../utils/global_variables.dart';
+
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
 
@@ -45,15 +47,7 @@ void onPageChanged(int page){
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-      children: [
-        Text('home '),
-         Text('search '),
-          Text('post '),
-           Text('notification '),
-            Text('profile '),
-    
-      ],
-      
+      children: homeScreenItems,
       //swipe to change the pages uncomment to diable it 
       //physics : NeverScrollableScrollPhysics(),
       controller: pageController,
