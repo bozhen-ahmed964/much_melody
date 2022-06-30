@@ -8,7 +8,7 @@ class User {
   final List followers;
   final List following;
 
-  const User({
+   const User({
     required this.email,
     required this.uid,
     required this.photoUrl,
@@ -28,7 +28,7 @@ class User {
 
 
 
-static User fromSnap(DocumentSnapshot snap) {
+  static User fromSnap(DocumentSnapshot snap) {
   var snapshot = snap.data() as Map<String, dynamic>;
   return User(
     username : snapshot['username'],

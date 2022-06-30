@@ -8,8 +8,8 @@ import 'package:muchmelody/models/user.dart' as model;
 import 'package:muchmelody/resources/storage_methods.dart';
 
 class AuthMethods {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+   final FirebaseAuth _auth = FirebaseAuth.instance;
+   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;

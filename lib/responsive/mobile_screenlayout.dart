@@ -45,11 +45,11 @@ void onPageChanged(int page){
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: PageView(
       children: homeScreenItems,
-      //swipe to change the pages uncomment to diable it 
-      //physics : NeverScrollableScrollPhysics(),
+     // swipe to change the pages uncomment to diable it 
+     // physics : NeverScrollableScrollPhysics(),
       controller: pageController,
       onPageChanged: onPageChanged,    
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:muchmelody/resources/auth_methods.dart';
-
 import '../models/user.dart';
 import 'package:flutter/material.dart';
 
