@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:muchmelody/utils/colors.dart';
+import '../widgets/post_card.dart';
 
-import '../screen/post_card.dart';
-
-class ScrollFeed extends StatelessWidget {
-  ScrollFeed({Key? key}) : super(key: key);
-  final _controller = PageController(initialPage: 0);
+class FeedScreen extends StatelessWidget {
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
         actions: [
@@ -24,12 +21,7 @@ class ScrollFeed extends StatelessWidget {
           ),
         ],
       ),
-
-    body: PostCard(),
-
-
-
-
+      body: PostCard(),
     );
   }
 }
