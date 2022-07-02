@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../utils/colors.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key}) : super(key: key);
+  final snap;
+  const PostCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,8 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 35,
                   backgroundImage: NetworkImage(
-                      'https://d.newsweek.com/en/full/1604681/ewan-mcgregor.jpg?w=1600&h=1600&l=48&t=42&q=88&f=abe3ca0eea75ab14d618465ea399cf6f'),
+                    snap['profileImage'],
+                  ),
                 ),
                 Expanded(
                   child: Padding(
@@ -29,7 +32,7 @@ class PostCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'User Name',
+                          snap['username'],
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -77,9 +80,7 @@ class PostCard extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
-            child: Image.network(
-                'https://media.gq.com.mx/photos/6260479eb6a67eb4f0c2ebca/2:3/w_1452,h_2178,c_limit/star%20wars.jpg',
-                fit: BoxFit.cover),
+            child: Image.network(snap['postUrl'], fit: BoxFit.cover),
           ),
 
           // Functional buttons
@@ -112,41 +113,44 @@ class PostCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '1.225 likes',
+                  '${snap['likes'].length} likes',
                   style: TextStyle(color: Colors.white),
                 ),
                 Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.only(top: 8),
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(color: primaryColor),
-                        children: [
-                          TextSpan(
-                            text: 'username : ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text:
-                                ' this is lorem ipsum chris redfield g bossssss',
-                          )
-                        ],
-                      ),
-                    ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text('View All 200 Comments',
-                        style : const TextStyle(fontSize : 14 , color : secondaryColor),
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(top: 8),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: primaryColor),
+                      children: [
+                        TextSpan(
+                          text: snap['username'],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ),
+                        TextSpan(
+                          text: ' ${snap['description']}',
+                        )
+                      ],
                     ),
-                    Container(
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text(
+                      'View All 200 Comments',
+                      style:
+                          const TextStyle(fontSize: 14, color: secondaryColor),
+                    ),
+                  ),
+                ),
+                Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Text(
-                    '27/6/2022',
+                    DateFormat.yMMMd().format(
+                      snap['datePublished'].toDate(),
+                    ),
                     style: const TextStyle(fontSize: 14, color: secondaryColor),
                   ),
                 ),

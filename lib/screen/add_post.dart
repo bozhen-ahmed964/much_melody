@@ -217,8 +217,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 SizedBox(height: 10),
 // ready to post element
                 SizedBox(
-                  height: 400,
-                  width: 400,
+                  height: 200,
+                  width: 200,
                   child: AspectRatio(
                     aspectRatio: 487 / 451,
                     child: Container(
