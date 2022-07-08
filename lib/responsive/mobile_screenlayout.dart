@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:muchmelody/utils/colors.dart';
-
 import '../utils/global_variables.dart';
 
 class MobileScreenLayout extends StatefulWidget {
