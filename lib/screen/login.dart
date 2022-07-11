@@ -3,6 +3,7 @@ import 'package:muchmelody/main.dart';
 import 'package:muchmelody/resources/auth_methods.dart';
 import 'package:muchmelody/screen/signup.dart';
 import 'package:muchmelody/utils/colors.dart';
+import 'package:muchmelody/utils/global_variables.dart';
 import 'package:muchmelody/utils/utils.dart';
 import 'package:muchmelody/widgets/textField_input.dart';
 import '../responsive/mobile_screenlayout.dart';
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
-           Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const responsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
@@ -70,7 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: MediaQuery.of(context).size.width > webScreenSize
+                  ? EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 3)
+                  : const EdgeInsets.symmetric(horizontal: 32),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

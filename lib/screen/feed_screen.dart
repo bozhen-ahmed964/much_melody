@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:muchmelody/screen/grid_feed_screen.dart';
+import 'package:muchmelody/screen/message_screen.dart';
 import 'package:muchmelody/utils/colors.dart';
 import '../widgets/post_card.dart';
 
@@ -13,12 +15,24 @@ class FeedScreen extends StatelessWidget {
         backgroundColor: mobileBackgroundColor,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications_active_outlined, size: 35.0),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GridFeedScreen(),
+                ),
+              );
+            },
+            icon: Icon(Icons.auto_awesome_mosaic, size: 25.0),
           ),
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications_active_outlined, size: 35.0),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MessageScreen(),
+                ),
+              );
+            },
+            icon: Icon(Icons.archive, size: 25.0),
           ),
         ],
       ),
