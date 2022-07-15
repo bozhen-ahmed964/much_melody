@@ -1,7 +1,8 @@
 
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Markdownify" width="200">
+
+  <img src="![Rectangle 1](https://user-images.githubusercontent.com/73129016/179252898-c783a3b3-a88c-4444-8919-2d9b7c3bec95.png)" alt="Much Melody" width="200">
   <br>
   Much Melody
   <br>
@@ -13,105 +14,58 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#credits">Credits</a> 
 </p>
 
 
-<img src="![login](https://user-images.githubusercontent.com/73129016/179248480-a233b604-7b92-4570-a4d5-7c6e0a90ede3.png)
-" alt="login" >
+
 
 ## Key Features
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
+* Login or sign up
+  - or continue with facebook or google account under authentication of firebase 
+* create post with image or GIF 
+* user can LIKE , Comment , Share , Save 
+* user can delete his/her own posts
+* user can follow and unfollow 
 * Cross platform
-  - Windows, macOS and Linux ready.
+  - Windows, macOS, IOS and Android ready.
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Flutter](https://flutter.dev)installed on your computer,
+ after that from your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
+$ git clone https://github.com/bozhen-ahmed964/much_melody.git
 
 # Go into the repository
-$ cd electron-markdownify
+$ cd muchmelody
 
 # Install dependencies
-$ npm install
+$ flutter pub get
 
-# Run the app
-$ npm start
 ```
-
-> **Note**
-> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-
-## Download
-
-You can [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) the latest installable version of Markdownify for Windows, macOS and Linux.
-
-## Emailware
-
-Markdownify is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <bullredeyes@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
 ## Credits
 
-This software uses the following open source packages:
+This software uses the following open source from pub dev :
 
-- [Electron](http://electron.atom.io/)
-- [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
-- [showdown](http://showdownjs.github.io/showdown/)
-- [CodeMirror](http://codemirror.net/)
-- Emojis are taken from [here](https://github.com/arvida/emoji-cheat-sheet.com)
-- [highlight.js](https://highlightjs.org/)
-
-## Related
-
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
-
-## Support
-
-<a href="https://www.buymeacoffee.com/5Zn8Xh3l9" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-<p>Or</p> 
-
-<a href="https://www.patreon.com/amitmerchant">
-	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
-
-## You may also like...
-
-- [Pomolectron](https://github.com/amitmerchant1990/pomolectron) - A pomodoro app
-- [Correo](https://github.com/amitmerchant1990/correo) - A menubar/taskbar Gmail App for Windows and macOS
-
-## License
-
-MIT
-
----
-
-> [amitmerchant.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp;
-> GitHub [@amitmerchant1990](https://github.com/amitmerchant1990) &nbsp;&middot;&nbsp;
-> Twitter [@amit_merchant](https://twitter.com/amit_merchant)
-
+- cloud_firestore: ^3.1.17
+- cupertino_icons: ^1.0.2
+- firebase_auth: ^3.3.19
+- firebase_core: ^1.17.1
+- firebase_storage: ^10.2.17
+- flutter_image: ^4.1.3
+- flutter_launcher_icons: ^0.9.3
+- flutter_staggered_grid_view: ^0.6.1
+- flutter_svg: ^1.1.0
+- font_awesome_flutter: ^10.1.0
+- giphy_get: ^3.1.0
+- image_picker: ^0.8.5+3
+- intl: ^0.17.0
+- provider: ^6.0.3
+- transparent_image: ^2.0.0
+- uuid: ^3.0.6
 
