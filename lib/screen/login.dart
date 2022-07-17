@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muchmelody/main.dart';
 import 'package:muchmelody/resources/auth_methods.dart';
 import 'package:muchmelody/screen/signup.dart';
@@ -120,6 +121,54 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           color: blueColor),
                     ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 55,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: FaIcon(FontAwesomeIcons.google,
+                              size: 35.0, color: Colors.red[400]),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'Or',
+                        style: TextStyle(color: primaryColor),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: 55,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: FaIcon(FontAwesomeIcons.facebook,
+                              size: 35.0, color: Color.fromARGB(255, 66, 103, 178)),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 12,

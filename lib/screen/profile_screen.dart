@@ -176,12 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Text(userData['username'],
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      )
+                      
                     ],
                   ),
                 ),
@@ -200,10 +195,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       itemCount: (snapshot.data! as dynamic).docs.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                        crossAxisCount: 2,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 1.5,
-                        childAspectRatio: 1,
+                        childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
                         DocumentSnapshot snap =

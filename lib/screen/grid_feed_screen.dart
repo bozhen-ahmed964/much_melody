@@ -30,9 +30,10 @@ class _GridFeedScreenState extends State<GridFeedScreen> {
           //
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-               crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              crossAxisCount: 3,
+               crossAxisCount: 2,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 1.5,
+              childAspectRatio: 0.7,
             ),
             itemCount: (snapshot.data! as dynamic).docs.length,
             itemBuilder: (context, index) => Image.network(

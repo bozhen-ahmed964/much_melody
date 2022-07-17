@@ -107,14 +107,28 @@ class _AddPostScreenState extends State<AddPostScreen> {
     final User user = Provider.of<UserProvider>(context).getUser;
 
     return _file == null
-        ? Center(
-            child: IconButton(
-              iconSize: 50.5,
-              alignment: Alignment.center,
-              icon: const Icon(
-                Icons.add_circle_outline,
+        ? Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  'https://images.unsplash.com/photo-1538819137474-ffa0ee381af6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1336&q=80',
+                ),
+                fit: BoxFit.cover,
               ),
-              onPressed: () => _selectImage(context),
+            ),
+            child: Center(
+              child: Stack(
+                children: [
+                  IconButton(
+                    iconSize: 50.5,
+                    alignment: Alignment.center,
+                    icon: const Icon(
+                      Icons.add_circle_outline,
+                    ),
+                    onPressed: () => _selectImage(context),
+                  ),
+                ],
+              ),
             ),
           )
         : Scaffold(
