@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:muchmelody/resources/auth_methods.dart';
 import 'package:muchmelody/resources/firestore_methods.dart';
+import 'package:muchmelody/screen/edit_profile_screen.dart';
 import 'package:muchmelody/screen/login.dart';
 import 'package:muchmelody/screen/setting_screen.dart';
 import 'package:muchmelody/utils/colors.dart';
@@ -86,7 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
-                  icon: Icon(Icons.logout_sharp, ),
+                  icon: Icon(
+                    Icons.logout_sharp,
+                  ),
                 ),
               ],
               centerTitle: false,
@@ -131,7 +134,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 mobileBackgroundColor,
                                             textColor: primaryColor,
                                             borderColor: Colors.grey,
-                                            function: () {},
+                                            function: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                           EditProfileScreen(),
+                                                ),
+                                              );
+                                            },
                                           )
                                         : isFollowing
                                             ? FollowButton(
@@ -176,7 +187,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      
                     ],
                   ),
                 ),

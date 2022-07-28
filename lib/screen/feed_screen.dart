@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muchmelody/screen/grid_feed_screen.dart';
 import 'package:muchmelody/screen/message_screen.dart';
 import 'package:muchmelody/utils/colors.dart';
@@ -31,8 +32,8 @@ class FeedScreen extends StatelessWidget {
                   builder: (context) => MessageScreen(),
                 ),
               );
-            },
-            icon: Icon(Icons.archive, size: 25.0),
+            }, 
+            icon: FaIcon(FontAwesomeIcons.comments, size: 25.0),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:muchmelody/screen/comment_screen.dart';
 import 'package:muchmelody/utils/utils.dart';
@@ -22,7 +23,6 @@ class _PostCardState extends State<PostCard> {
   int commentLen = 0;
   @override
   void initState() {
-    
     super.initState();
     getComments();
   }
@@ -50,6 +50,19 @@ class _PostCardState extends State<PostCard> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
+          SizedBox(height: 8),
+          // posted image
+
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: double.infinity,
+                child: Image.network(widget.snap['postUrl'], fit: BoxFit.cover),
+              ),
+            ],
+          ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16)
                 .copyWith(right: 0),
@@ -116,32 +129,6 @@ class _PostCardState extends State<PostCard> {
               ],
             ),
           ),
-          SizedBox(height: 8),
-          // posted image
-          GestureDetector(
-            onDoubleTap: () async {
-              await FirestoreMethods().likePost(
-                widget.snap['postId'],
-                user.uid,
-                widget.snap['likes'],
-              );
-              setState(() {
-                isLikeAnimating = true;
-              });
-            },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  width: double.infinity,
-                  child:
-                      Image.network(widget.snap['postUrl'], fit: BoxFit.cover),
-                ),
-              ],
-            ),
-          ),
-
           // Functional buttons
           Row(
             children: [
@@ -161,6 +148,10 @@ class _PostCardState extends State<PostCard> {
                         Icons.favorite_border,
                       ),
               ),
+              Text(
+                '${widget.snap['likes'].length} likes',
+                style: TextStyle(color: Colors.white),
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -169,19 +160,24 @@ class _PostCardState extends State<PostCard> {
                     ),
                   );
                 },
-                icon: Icon(Icons.comment, color: Colors.white, size: 26),
+                icon: FaIcon(FontAwesomeIcons.message, color: Colors.white, size: 24),
+              ),
+              Text(
+                '$commentLen comments',
+                style: TextStyle(color: Colors.white),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.send_sharp, color: Colors.white, size: 26),
+                icon: FaIcon(FontAwesomeIcons.paperPlane,
+                    color: Colors.white, size: 24),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.bookmark, color: Colors.white, size: 26),
+                icon: FaIcon(FontAwesomeIcons.bookmark,
+                    color: Colors.white, size: 24),
               ),
             ],
           ),
-
           //description part here
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -189,13 +185,9 @@ class _PostCardState extends State<PostCard> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${widget.snap['likes'].length} likes',
-                  style: TextStyle(color: Colors.white),
-                ),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 2),
                   child: RichText(
                     text: TextSpan(
                       style: const TextStyle(color: primaryColor),
@@ -208,17 +200,6 @@ class _PostCardState extends State<PostCard> {
                           text: ' ${widget.snap['description']}',
                         )
                       ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Text(
-                      'View All $commentLen Comments',
-                      style:
-                          const TextStyle(fontSize: 14, color: secondaryColor),
                     ),
                   ),
                 ),

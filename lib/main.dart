@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Much Melody',
         theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: mobileBackgroundColor,
+          scaffoldBackgroundColor: mobileBackgroundColor,
         ),
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
@@ -74,4 +74,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
