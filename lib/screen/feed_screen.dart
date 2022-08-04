@@ -36,6 +36,9 @@ class FeedScreen extends StatelessWidget {
             icon: FaIcon(FontAwesomeIcons.comments, size: 25.0),
           ),
         ],
+        title: Text('Feeds'),
+        centerTitle: false,
+
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('post').snapshots(),

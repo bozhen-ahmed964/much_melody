@@ -51,43 +51,50 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   _selectImage(BuildContext context) async {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: Text('Select Image From'),
-            children: [
-              SimpleDialogOption(
-                padding: const EdgeInsets.all(20.0),
-                child: Text('Take a photo'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.camera);
-                  setState(() {
-                    _file = file;
-                  });
-                },
-              ),
-              SimpleDialogOption(
-                padding: const EdgeInsets.all(20.0),
-                child: Text('Chose from gallery'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.gallery);
-                  setState(() {
-                    _file = file;
-                  });
-                },
-              ),
-              SimpleDialogOption(
-                padding: const EdgeInsets.all(20.0),
-                child: Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+      barrierColor: Color.fromARGB(90, 255, 255, 255),
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: Colors.white,
+          title: Text('Select File From' , style: TextStyle(color: Colors.black)),
+          children: [
+            SimpleDialogOption(
+              padding: const EdgeInsets.all(20.0),
+              child: Text('Take a photo' , style: TextStyle(color : Colors.black),),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                Uint8List file = await pickImage(ImageSource.camera);
+                setState(() {
+                  _file = file;
+                });
+              },
+            ),
+            SimpleDialogOption(
+              padding: const EdgeInsets.all(20.0),
+              child: Text('Chose from gallery' ,
+                  style: TextStyle(color: Colors.black)),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                Uint8List file = await pickImage(ImageSource.gallery);
+                setState(() {
+                  _file = file;
+                });
+              },
+            ),
+            SimpleDialogOption(
+              padding: const EdgeInsets.all(20.0),
+              child: Text('Cancel' , style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void clearImage() {
