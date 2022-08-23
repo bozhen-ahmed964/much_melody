@@ -18,18 +18,6 @@
 </p>
 
 
-<p float="left">
-  <img src="https://user-images.githubusercontent.com/73129016/179253301-56ff0ff1-e13f-4179-ac94-dd9b537fa3d3.png" />
-  <img src="https://user-images.githubusercontent.com/73129016/179254861-6c80eb13-7d2c-454d-adc1-d14f279a7b2f.png" /> 
-  <img src="https://user-images.githubusercontent.com/73129016/179254875-f8cfbcd7-30c1-4fa4-8f99-de38e731ba88.png" />
-  <img src="https://user-images.githubusercontent.com/73129016/179255097-816f6169-62a9-4a8d-9601-22bdc64b1d49.png" />
-</p>
-
-
-
-
-
-
 ## Key Features
 
 * Login or sign up
