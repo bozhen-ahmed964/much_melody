@@ -59,11 +59,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           backgroundColor: Colors.white,
-          title: Text('Select File From' , style: TextStyle(color: Colors.black)),
+          title:
+              Text('Select File From', style: TextStyle(color: Colors.black)),
           children: [
             SimpleDialogOption(
               padding: const EdgeInsets.all(20.0),
-              child: Text('Take a photo' , style: TextStyle(color : Colors.black),),
+              child: Text(
+                'Take a photo',
+                style: TextStyle(color: Colors.black),
+              ),
               onPressed: () async {
                 Navigator.of(context).pop();
                 Uint8List file = await pickImage(ImageSource.camera);
@@ -74,7 +78,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20.0),
-              child: Text('Chose from gallery' ,
+              child: Text('Chose from gallery',
                   style: TextStyle(color: Colors.black)),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -86,7 +90,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20.0),
-              child: Text('Cancel' , style: TextStyle(color: Colors.black)),
+              child: Text('Cancel', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -111,7 +115,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
+    final MelodyUser user = Provider.of<UserProvider>(context).getUser;
 
     return _file == null
         ? Container(

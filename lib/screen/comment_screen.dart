@@ -26,7 +26,7 @@ class _CommentScreenState extends State<CommentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
+    final MelodyUser user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
@@ -38,7 +38,7 @@ class _CommentScreenState extends State<CommentScreen> {
               .collection('post')
               .doc(widget.snap['postId'])
               .collection('comments')
-              .orderBy('datePublished' , descending: true)
+              .orderBy('datePublished', descending: true)
               .snapshots(),
           builder: (constext, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -49,8 +49,7 @@ class _CommentScreenState extends State<CommentScreen> {
             return ListView.builder(
               itemCount: (snapshot.data! as dynamic).docs.length,
               itemBuilder: (constext, index) => CommentCard(
-                snap : (snapshot.data! as dynamic).docs[index].data()
-              ),
+                  snap: (snapshot.data! as dynamic).docs[index].data()),
             );
           }),
       bottomNavigationBar: SafeArea(

@@ -32,13 +32,12 @@ class FeedScreen extends StatelessWidget {
                   builder: (context) => MessageScreen(),
                 ),
               );
-            }, 
+            },
             icon: FaIcon(FontAwesomeIcons.comments, size: 25.0),
           ),
         ],
         title: Text('Feeds'),
         centerTitle: false,
-
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('post').snapshots(),
@@ -48,7 +47,14 @@ class FeedScreen extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          } else if (snapshot.data == null && snapshot.data!.docs.isEmpty) {
+            return Text('no documents');
           }
+
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) => PostCard(

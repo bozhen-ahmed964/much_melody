@@ -8,15 +8,13 @@ import 'package:muchmelody/models/user.dart' as model;
 import 'package:muchmelody/resources/storage_methods.dart';
 
 class AuthMethods {
-   final  FirebaseAuth _auth = FirebaseAuth.instance;
-   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<model.User> getUserDetails() async {
-    User currentUser = _auth.currentUser!;
-
+  Future<model.MelodyUser> getUserDetails(User user) async {
     DocumentSnapshot snap =
-        await _firestore.collection('users').doc(currentUser.uid).get();
-    return model.User.fromSnap(snap);
+        await _firestore.collection('users').doc(user.uid).get();
+    return model.MelodyUser.fromSnap(snap);
   }
 
   //Sign Up
@@ -38,7 +36,7 @@ class AuthMethods {
             .uploadImageToStorage('profilePics', file, false);
 
         // add user to our database
-        model.User user = model.User(
+        model.MelodyUser user = model.MelodyUser(
           username: username,
           uid: cred.user!.uid,
           email: email,
@@ -99,11 +97,7 @@ class AuthMethods {
     return res;
   }
 
-
- Future<void> signOut()async{
-  await _auth.signOut();
-}
-
-
-
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }

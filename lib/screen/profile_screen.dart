@@ -53,6 +53,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       followers = userSnap.data()!['followers'].length;
       following = userSnap.data()!['following'].length;
+
+      //replace the entire logic with flag isMySelf == false ;
       isFollowing = userSnap
           .data()!['Followers']
           .contains(FirebaseAuth.instance.currentUser!.uid);
@@ -139,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 MaterialPageRoute(
                                                   builder:
                                                       (BuildContext context) =>
-                                                           EditProfileScreen(),
+                                                          EditProfileScreen(),
                                                 ),
                                               );
                                             },
