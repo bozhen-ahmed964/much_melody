@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:muchmelody/main.dart';
 import 'package:muchmelody/utils/colors.dart';
 import 'package:muchmelody/utils/utils.dart';
 import 'package:muchmelody/widgets/textField_input.dart';
@@ -61,12 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
       showSnackBar(res, context);
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const responsiveLayout(
-            mobileScreenLayout: MobileScreenLayout(),
-            webScreenLayout: WebScreenLayout(),
-          ),
-        ),
+        MaterialPageRoute(builder: (context) => const MyApp()),
       );
     }
   }
@@ -152,7 +148,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   InkWell(
                     onTap: signUpUser,
                     child: Container(
-                      
                       child: _isLoading
                           ? Center(
                               child: const CircularProgressIndicator(

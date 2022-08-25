@@ -11,11 +11,9 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<model.MelodyUser> getUserDetails() async {
-    User currentUser = _auth.currentUser!;
-
+  Future<model.MelodyUser> getUserDetails(User user) async {
     DocumentSnapshot snap =
-        await _firestore.collection('users').doc(currentUser.uid).get();
+        await _firestore.collection('users').doc(user.uid).get();
     return model.MelodyUser.fromSnap(snap);
   }
 

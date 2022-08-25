@@ -39,12 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const responsiveLayout(
-            mobileScreenLayout: MobileScreenLayout(),
-            webScreenLayout: WebScreenLayout(),
-          ),
-        ),
+        MaterialPageRoute(builder: (context) => const MyApp()),
       );
     } else {
       showSnackBar(res, context);
@@ -109,12 +104,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: _isLoading
                           ? const Center(
                               child: CircularProgressIndicator(
-                                strokeWidth: 2,
+                              strokeWidth: 2,
                               color: primaryColor,
                             ))
                           : const Text('Log in'),
                       width: double.infinity,
-                       height: 55,
+                      height: 55,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: const ShapeDecoration(
@@ -167,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: IconButton(
                           onPressed: () {},
                           icon: FaIcon(FontAwesomeIcons.facebook,
-                              size: 35.0, color: Color.fromARGB(255, 66, 103, 178)),
+                              size: 35.0,
+                              color: Color.fromARGB(255, 66, 103, 178)),
                         ),
                       ),
                     ],

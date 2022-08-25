@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:muchmelody/providers/user_provider.dart';
 import 'package:muchmelody/utils/global_variables.dart';
@@ -25,7 +26,7 @@ class _responsiveLayoutState extends State<responsiveLayout> {
 
   addData() async {
     UserProvider _userProvider = Provider.of(context, listen: false);
-    await _userProvider.refreshUser();
+    await _userProvider.refreshUser(FirebaseAuth.instance.currentUser!);
   }
 
   @override
