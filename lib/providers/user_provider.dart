@@ -4,13 +4,13 @@ import '../models/user.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
-  User? _user;
+  MelodyUser? _user;
   final AuthMethods _authMethods = AuthMethods();
 
-  User get getUser => _user!;
+  MelodyUser get getUser => _user!;
 
   Future<void> refreshUser() async {
-    User user = await _authMethods.getUserDetails();
+    MelodyUser user = await _authMethods.getUserDetails();
     _user = user;
     notifyListeners();
   }
