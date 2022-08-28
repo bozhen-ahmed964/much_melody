@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
                 child: Text('${snapshot.error}'),
               );
             } else if (snapshot.data == null) {
-              return Text('null');
+              return LoginScreen();
             }
 
             //TODO: set the user on the provider
