@@ -85,9 +85,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    await AuthMethods().signOut();
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    await FirebaseAuth.instance.signOut();
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   icon: Icon(
                     Icons.logout_sharp,
