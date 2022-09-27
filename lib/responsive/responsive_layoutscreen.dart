@@ -1,23 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:muchmelody/providers/user_provider.dart';
 import 'package:muchmelody/utils/global_variables.dart';
 import 'package:provider/provider.dart';
 
-class responsiveLayout extends StatefulWidget {
-  final Widget webScreenLayout;
+class ResponsiveLayout extends StatefulWidget {
   final Widget mobileScreenLayout;
-  const responsiveLayout({
+  final Widget webScreenLayout;
+  const ResponsiveLayout({
     Key? key,
-    required this.webScreenLayout,
     required this.mobileScreenLayout,
+    required this.webScreenLayout,
   }) : super(key: key);
 
   @override
-  State<responsiveLayout> createState() => _responsiveLayoutState();
+  State<ResponsiveLayout> createState() => _ResponsiveLayoutState();
 }
 
-class _responsiveLayoutState extends State<responsiveLayout> {
+class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   void initState() {
     super.initState();
@@ -25,19 +24,19 @@ class _responsiveLayoutState extends State<responsiveLayout> {
   }
 
   addData() async {
-    UserProvider _userProvider = Provider.of(context, listen: false);
-    await _userProvider.refreshUser(FirebaseAuth.instance.currentUser!);
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    await _userProvider.refreshUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth > webScreenSize) {
-          return widget.webScreenLayout;
-        }
-        return widget.mobileScreenLayout;
-      },
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth > webScreenSize) {
+        // 600 can be changed to 900 if you want to display tablet screen with mobile screen layout
+        return widget.webScreenLayout;
+      }
+      return widget.mobileScreenLayout;
+    });
   }
 }

@@ -1,104 +1,102 @@
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:muchmelody/models/user.dart';
-import 'package:muchmelody/providers/user_provider.dart';
+
 import 'package:muchmelody/resources/firestore_methods.dart';
+import 'package:muchmelody/utils/colors.dart';
 import 'package:muchmelody/utils/utils.dart';
 import 'package:provider/provider.dart';
-import '../utils/colors.dart';
+
+import '../providers/user_provider.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddPostScreen> createState() => _AddPostScreenState();
+  _AddPostScreenState createState() => _AddPostScreenState();
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
+  bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
-  bool _isLoading = false;
 
-  void postImage(
-    String uid,
-    String username,
-    String profileImage,
-  ) async {
-    setState(() {
-      _isLoading = true;
-    });
-    try {
-      String res = await FirestoreMethods().uploadPost(
-          _descriptionController.text, _file!, uid, username, profileImage);
-      if (res == 'success') {
-        setState(() {
-          _isLoading = false;
-        });
-
-        showSnackBar('Posted', context);
-        clearImage();
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        showSnackBar(res, context);
-      }
-    } catch (e) {
-      showSnackBar(e.toString(), context);
-    }
-  }
-
-  _selectImage(BuildContext context) async {
+  _selectImage(BuildContext parentContext) async {
     return showDialog(
-      barrierColor: Color.fromARGB(90, 255, 255, 255),
-      context: context,
-      builder: (context) {
+      context: parentContext,
+      builder: (BuildContext context) {
         return SimpleDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          backgroundColor: Colors.white,
-          title:
-              Text('Select File From', style: TextStyle(color: Colors.black)),
-          children: [
+          title: const Text('Create a Post'),
+          children: <Widget>[
             SimpleDialogOption(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'Take a photo',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                Uint8List file = await pickImage(ImageSource.camera);
-                setState(() {
-                  _file = file;
-                });
-              },
-            ),
+                padding: const EdgeInsets.all(20),
+                child: const Text('Take a photo'),
+                onPressed: () async {
+                  Navigator.pop(context);
+                  Uint8List file = await pickImage(ImageSource.camera);
+                  setState(() {
+                    _file = file;
+                  });
+                }),
             SimpleDialogOption(
-              padding: const EdgeInsets.all(20.0),
-              child: Text('Chose from gallery',
-                  style: TextStyle(color: Colors.black)),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                Uint8List file = await pickImage(ImageSource.gallery);
-                setState(() {
-                  _file = file;
-                });
-              },
-            ),
+                padding: const EdgeInsets.all(20),
+                child: const Text('Choose from Gallery'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List file = await pickImage(ImageSource.gallery);
+                  setState(() {
+                    _file = file;
+                  });
+                }),
             SimpleDialogOption(
-              padding: const EdgeInsets.all(20.0),
-              child: Text('Cancel', style: TextStyle(color: Colors.black)),
+              padding: const EdgeInsets.all(20),
+              child: const Text("Cancel"),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-            ),
+            )
           ],
         );
       },
     );
+  }
+
+  void postImage(String uid, String username, String profImage) async {
+    setState(() {
+      isLoading = true;
+    });
+    // start the loading
+    try {
+      // upload to storage and db
+      String res = await FireStoreMethods().uploadPost(
+        _descriptionController.text,
+        _file!,
+        uid,
+        username,
+        profImage,
+      );
+      if (res == "success") {
+        setState(() {
+          isLoading = false;
+        });
+        showSnackBar(
+          context,
+          'Posted!',
+        );
+        clearImage();
+      } else {
+        showSnackBar(context, res);
+      }
+    } catch (err) {
+      setState(() {
+        isLoading = false;
+      });
+      showSnackBar(
+        context,
+        err.toString(),
+      );
+    }
   }
 
   void clearImage() {
@@ -115,31 +113,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final MelodyUser user = Provider.of<UserProvider>(context).getUser;
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return _file == null
-        ? Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  'https://images.unsplash.com/photo-1538819137474-ffa0ee381af6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1336&q=80',
-                ),
-                fit: BoxFit.cover,
+        ? Center(
+            child: IconButton(
+              icon: const Icon(
+                Icons.upload,
               ),
-            ),
-            child: Center(
-              child: Stack(
-                children: [
-                  IconButton(
-                    iconSize: 50.5,
-                    alignment: Alignment.center,
-                    icon: const Icon(
-                      Icons.add_circle_outline,
-                    ),
-                    onPressed: () => _selectImage(context),
-                  ),
-                ],
-              ),
+              onPressed: () => _selectImage(context),
             ),
           )
         : Scaffold(
@@ -149,117 +131,71 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: clearImage,
               ),
-              title: const Text('Add Post '),
+              title: const Text(
+                'Post to',
+              ),
               centerTitle: false,
-              actions: [
+              actions: <Widget>[
                 TextButton(
-                  onPressed: () =>
-                      postImage(user.uid, user.username, user.photoUrl),
-                  child: const Text(
-                    'Post',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
-                        fontSize: 18.0),
+                  onPressed: () => postImage(
+                    userProvider.getUser!.uid,
+                    userProvider.getUser!.username,
+                    userProvider.getUser!.photoUrl,
                   ),
-                ),
+                  child: const Text(
+                    "Post",
+                    style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0),
+                  ),
+                )
               ],
             ),
+            // POST FORM
             body: Column(
-              children: [
-                _isLoading
+              children: <Widget>[
+                isLoading
                     ? const LinearProgressIndicator()
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 0),
-                      ),
+                    : const Padding(padding: EdgeInsets.only(top: 0.0)),
                 const Divider(),
-                SizedBox(height: 15.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // user Profile picture
-                    // CircleAvatar(
-                    //   maxRadius: 50.0,
-                    //   backgroundImage: NetworkImage(
-                    //       'https://portalpopline.com.br/wp-content/uploads/2022/05/obi-wan-kenobi-2.jpg'),
-                    // ),
-                    //TextField input
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        userProvider.getUser!.photoUrl,
+                      ),
+                    ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      width: MediaQuery.of(context).size.width * 0.3,
                       child: TextField(
                         controller: _descriptionController,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromARGB(20, 255, 255, 255),
-                          hintText: 'Write Description',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
+                        decoration: const InputDecoration(
+                            hintText: "Write a caption...",
+                            border: InputBorder.none),
+                        maxLines: 8,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 45.0,
+                      width: 45.0,
+                      child: AspectRatio(
+                        aspectRatio: 487 / 451,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            fit: BoxFit.fill,
+                            alignment: FractionalOffset.topCenter,
+                            image: MemoryImage(_file!),
+                          )),
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 18),
-// chose music , gif , image
-                Container(
-                  height: 62.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30.0),
-                    border: Border.all(),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        color: Colors.black,
-                        onPressed: () {},
-                        icon: Icon(Icons.music_note, size: 35.0),
-                      ),
-                      SizedBox(width: 90),
-                      IconButton(
-                        color: Colors.black,
-                        onPressed: () {},
-                        icon: Icon(Icons.gif_box_outlined, size: 35.0),
-                      ),
-                      SizedBox(width: 90),
-                      IconButton(
-                        color: Colors.black,
-                        onPressed: () {
-                          _selectImage(context);
-                        },
-                        icon: Icon(Icons.image_outlined, size: 35.0),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10),
-// ready to post element
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: AspectRatio(
-                    aspectRatio: 487 / 451,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(width: 2),
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        image: DecorationImage(
-                          image: MemoryImage(_file!),
-                          fit: BoxFit.cover,
-                          alignment: FractionalOffset.topCenter,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                const Divider(),
               ],
             ),
           );

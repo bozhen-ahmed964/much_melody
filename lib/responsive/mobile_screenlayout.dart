@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muchmelody/utils/colors.dart';
-import '../utils/global_variables.dart';
+import 'package:muchmelody/utils/global_variables.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class MobileScreenLayout extends StatefulWidget {
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int _page = 0;
-  late PageController pageController;
+  late PageController pageController; // for tabs animation
 
   @override
   void initState() {
@@ -27,14 +26,15 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     pageController.dispose();
   }
 
-  void navigationTapped(int page) {
-    pageController.jumpToPage(page);
-  }
-
   void onPageChanged(int page) {
     setState(() {
       _page = page;
     });
+  }
+
+  void navigationTapped(int page) {
+    //Animating Page
+    pageController.jumpToPage(page);
   }
 
   @override
@@ -42,43 +42,38 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     return Scaffold(
       body: PageView(
         children: homeScreenItems,
-        // swipe to change the pages uncomment to diable it
-        // physics : NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
       ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: mobileBackgroundColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.house,
-              color: _page == 0 ? primaryColor : secondaryColor,
-              size: 25,
-            ),
-            label: '',
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.safari,
-              color: _page == 1 ? primaryColor : secondaryColor,
-              size: 25,
-            ),
-            label: '',
-            backgroundColor: primaryColor,
-          ),
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add_circle_outline,
-              color: _page == 2 ? primaryColor : secondaryColor,
+              Icons.home,
+              color: (_page == 0) ? primaryColor : secondaryColor,
             ),
             label: '',
             backgroundColor: primaryColor,
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.bell,size: 25.0 , 
-              color: _page == 3 ? primaryColor : secondaryColor,
+              icon: Icon(
+                Icons.search,
+                color: (_page == 1) ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_circle,
+                color: (_page == 2) ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
+              color: (_page == 3) ? primaryColor : secondaryColor,
             ),
             label: '',
             backgroundColor: primaryColor,
@@ -86,13 +81,14 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: _page == 4 ? primaryColor : secondaryColor,
+              color: (_page == 4) ? primaryColor : secondaryColor,
             ),
             label: '',
             backgroundColor: primaryColor,
           ),
         ],
         onTap: navigationTapped,
+        currentIndex: _page,
       ),
     );
   }
